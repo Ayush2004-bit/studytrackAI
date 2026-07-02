@@ -1,4 +1,14 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+# IDE
+.idea/
+.vscode/
+
+# Virtual Environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Large File
 model/similarity_matrix.npy
