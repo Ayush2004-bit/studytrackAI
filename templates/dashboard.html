@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h4>Select Student</h4>
+
+<form method="POST" class="mb-4">
+    <select name="student_id" class="form-select mb-2" required>
+        <option value="">-- Select ID --</option>
+        {% for sid in student_ids %}
+        <option value="{{ sid }}">{{ sid }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-primary">Get Insights</button>
+</form>
+
+{% if student_data is not none %}
+<div class="card p-3 mb-3 border-start border-4 border-{{ cluster_info.color }}">
+    <h5>Student Summary</h5>
+    <p><b>ID:</b> {{ student_data.Student_ID }}</p>
+    <p><b>Total Score:</b> {{ student_data.Total_Score }}</p>
+    <p><b>Cluster:</b> {{ cluster_info.title }}</p>
+</div>
+
+<div class="card p-3">
+    <h6>Recommendations</h6>
+    <ul>
+        {% for r in recommendations %}
+        <li>{{ r }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}

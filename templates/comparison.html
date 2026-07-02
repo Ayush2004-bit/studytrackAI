@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}ML Cluster Comparison | StudyTrack AI{% endblock %}
+
+{% block content %}
+<h4 class="mb-4">ML Cluster-Based Student Comparison</h4>
+
+<form method="POST" class="row mb-4">
+    <div class="col-md-4">
+        <select name="student_a" class="form-select" required>
+            <option value="">Select Student A</option>
+            {% for sid in student_ids %}
+            <option value="{{ sid }}">{{ sid }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <select name="student_b" class="form-select" required>
+            <option value="">Select Student B</option>
+            {% for sid in student_ids %}
+            <option value="{{ sid }}">{{ sid }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <button class="btn btn-primary w-100">Compare</button>
+    </div>
+</form>
+
+{% if student_a is not none %}
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card border-start border-4 border-{{ cluster_a.color }}">
+            <div class="card-body">
+                <h5>Student {{ student_a.Student_ID }}</h5>
+                <span class="badge bg-{{ cluster_a.color }}">
+                    Cluster {{ student_a.KMeans_Cluster }} – {{ cluster_a.title }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card border-start border-4 border-{{ cluster_b.color }}">
+            <div class="card-body">
+                <h5>Student {{ student_b.Student_ID }}</h5>
+                <span class="badge bg-{{ cluster_b.color }}">
+                    Cluster {{ student_b.KMeans_Cluster }} – {{ cluster_b.title }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if same_cluster %}
+<div class="alert alert-success">
+    Both students belong to the <b>same ML cluster</b>.
+</div>
+{% else %}
+<div class="alert alert-warning">
+    Students belong to <b>different ML clusters</b>.
+</div>
+{% endif %}
+
+<div class="card shadow-sm">
+    <div class="card-body d-flex justify-content-center">
+        <canvas id="compareChart" style="max-width: 400px; max-height: 400px;"></canvas>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+new Chart(document.getElementById("compareChart"), {
+    type: "radar",
+    data: {
+        labels: ["Study Hours", "Attendance", "Stress", "Sleep", "Total Score"],
+        datasets: [
+            {
+                label: "Student {{ student_a.Student_ID }}",
+                data: [
+                    {{ student_a.Study_Hours_per_Week }},
+                    {{ student_a['Attendance (%)'] }},
+                    {{ student_a['Stress_Level (1-10)'] }},
+                    {{ student_a.Sleep_Hours_per_Night }},
+                    {{ student_a.Total_Score }}
+                ]
+            },
+            {
+                label: "Student {{ student_b.Student_ID }}",
+                data: [
+                    {{ student_b.Study_Hours_per_Week }},
+                    {{ student_b['Attendance (%)'] }},
+                    {{ student_b['Stress_Level (1-10)'] }},
+                    {{ student_b.Sleep_Hours_per_Night }},
+                    {{ student_b.Total_Score }}
+                ]
+            }
+        ]
+    }
+});
+</script>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Student Profile{% endblock %}
+
+{% block content %}
+<div class="card p-4 border-start border-4 border-{{ cluster_info.color }}">
+    <h4>Student {{ student.Student_ID }}</h4>
+    <p>Total Score: {{ student.Total_Score }}</p>
+    <p>Attendance: {{ student["Attendance (%)"] }}%</p>
+    <p>Study Hours: {{ student.Study_Hours_per_Week }}</p>
+    <p>{{ cluster_info.description }}</p>
+    <a href="{{ url_for('ai_chat', sid=student['Student_ID']) }}"
+   class="btn btn-success mt-3">
+   🤖 Chat with AI Mentor
+</a>
+
+</div>
+{% endblock %}

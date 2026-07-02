@@ -1,0 +1,38 @@
+body { background: #f4f6f9; }
+
+.sidebar {
+    width: 200px;
+    min-height: 100vh;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #495057;
+}
+
+.content {
+    width: 100%;
+}
+
+.footer {
+    background: #212529;
+    color: white;
+    padding: 10px;
+}
+.sidebar a {
+    display: block;
+    padding: 10px;
+    color: #adb5bd;
+    border-radius: 6px;
+}
+
+.sidebar a:hover {
+    background: #495057;
+    color: #fff;
+}

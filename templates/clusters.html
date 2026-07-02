@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Clusters{% endblock %}
+
+{% block content %}
+<div class="row">
+{% for id, c in cluster_insights.items() %}
+<div class="col-md-3">
+    <div class="card p-3 border-start border-4 border-{{ c.color }}">
+        <h6>Cluster {{ id }}</h6>
+        <p>{{ c.title }}</p>
+        <small>{{ c.description }}</small>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}AI Mentor Chat | StudyTrack AI{% endblock %}
+
+{% block content %}
+<h4>🤖 AI Study Mentor</h4>
+<p class="text-muted">Personalized AI guidance for {{ student["First_Name"] }}</p>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="POST">
+            <input type="text" name="message" class="form-control mb-3"
+                   placeholder="Ask me about stress, study, sleep, scores..." required>
+
+            <button class="btn btn-primary">Ask AI</button>
+        </form>
+
+        {% if reply %}
+        <hr>
+        <div class="alert alert-success">
+            <strong>AI Mentor:</strong><br>
+            {{ reply }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

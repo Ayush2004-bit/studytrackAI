@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Students | StudyTrack AI{% endblock %}
+
+{% block content %}
+<h4 class="mb-3">Student Profiles</h4>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Total Score</th>
+                    <th>Attendance (%)</th>
+                    <th>Study Hours</th>
+                    <th>Cluster</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in students %}
+                <tr>
+                    <td>{{ s["Student_ID"] }}</td>
+                    <td>{{ "%.2f"|format(s["Total_Score"]) }}</td>
+                    <td>{{ s["Attendance (%)"] }}</td>
+                    <td>{{ s["Study_Hours_per_Week"] }}</td>
+                    <td>
+                        <span class="badge bg-info">
+                            {{ s["KMeans_Cluster"] }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('student_profile', sid=s['Student_ID']) }}"
+                           class="btn btn-sm btn-outline-primary">
+                            View
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

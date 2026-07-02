@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}StudyTrack AI{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-primary px-3">
+    <span class="navbar-brand">StudyTrack AI</span>
+    <a href="/logout" class="btn btn-light btn-sm">Logout</a>
+</nav>
+
+<div class="d-flex">
+
+<!-- SIDEBAR -->
+<div class="sidebar bg-dark text-white p-3">
+    <h6 class="text-uppercase text-secondary">Navigation</h6>
+    <a href="/dashboard">📊 Overview</a>
+    <a href="/students">👤 Student Profiles</a>
+    <a href="/performance">📈 Performance</a>
+    <a href="/habits">⏰ Study Habits</a>
+    <a href="/lifestyle">😴 Lifestyle</a>
+    <a href="/clusters">🧠 Clusters</a>
+    <a href="/recommendations">🎯 Recommendations</a>
+<a href="/comparison">📊ML Comparison</a>
+
+
+
+
+</div>
+
+
+<!-- MAIN CONTENT -->
+<div class="content p-4">
+    {% block content %}{% endblock %}
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer text-center">
+    © 2026 StudyTrack AI | Flask Project
+</footer>
+
+</body>
+</html>

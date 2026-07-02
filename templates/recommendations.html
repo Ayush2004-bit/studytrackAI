@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Recommendations | StudyTrack AI{% endblock %}
+
+{% block content %}
+<h4 class="mb-3">AI-Based Study Recommendations</h4>
+
+{% for r in recs %}
+<div class="card mb-3 shadow-sm">
+    <div class="card-header bg-primary text-white">
+        Cluster {{ r.cluster }}
+    </div>
+    <div class="card-body">
+        <ul>
+            {% for tip in r.recommendations %}
+            <li>{{ tip }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

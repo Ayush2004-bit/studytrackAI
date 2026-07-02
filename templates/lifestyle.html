@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Lifestyle Analysis | StudyTrack AI{% endblock %}
+
+{% block content %}
+<h4 class="mb-3">Lifestyle Analysis by Cluster</h4>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <canvas id="lifestyleChart" style="max-height:350px;"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById("lifestyleChart");
+
+new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: {{ clusters | tojson }},
+        datasets: [
+            {
+                label: "Avg Sleep Hours",
+                data: {{ sleep_hours | tojson }},
+                borderWidth: 1
+            },
+            {
+                label: "Avg Stress Level",
+                data: {{ stress_levels | tojson }},
+                borderWidth: 1
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+</script>
+{% endblock %}
